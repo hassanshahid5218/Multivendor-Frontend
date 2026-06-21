@@ -63,27 +63,7 @@ const UserOrderDetails = () => {
     })
   };
 
-  const handleMessageSubmit = async () => {
-    if (isAuthenticated) {
-      const groupTitle = data._id + user._id;
-      const userId = user._id;
-      const sellerId = data.shop._id;
-      await axios
-        .post(`${server}/conversation/create-new-conversation`, {
-          groupTitle,
-          userId,
-          sellerId,
-        })
-        .then((res) => {
-          navigate(`/inbox?${res.data.conversation.id}`);
-        })
-        .catch((error) => {
-          toast.error(error.response.data.message);
-        });
-    } else {
-      toast.error("Please login to create a conversation");
-    }
-  };
+  
 
   return (
     <div className={`py-4 min-h-screen ${styles.section}`}>
@@ -255,9 +235,9 @@ const UserOrderDetails = () => {
         </div>
       </div>
       <br />
-      
-        <div className={`${styles.button} text-white`}   onClick={handleMessageSubmit}>Send Message</div>
-      
+        <Link to='/inbox/:id' >
+        <div className={`${styles.button} text-white`}  >Send Message</div>
+        </Link>
       <br />
       <br />
     </div>
