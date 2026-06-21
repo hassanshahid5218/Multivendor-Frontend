@@ -141,11 +141,13 @@ const DashboardMessages = () => {
     console.log("Sender or conversation not found");
     return;
   }
+  
 
   const receiverId = currentChat.members.find(
     (member) => member !== senderId
   );
-
+  
+  
   const message = {
     sender: senderId,
     text: newMessage,
