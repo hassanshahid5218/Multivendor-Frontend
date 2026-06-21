@@ -424,6 +424,7 @@ const SellerInbox = ({
               {item.images?.url && (
                 <img
                   src={`${item.images?.url}`}
+                  alt=""
                   className="w-[300px] h-[300px] object-cover rounded-[10px] ml-2 mb-2"
                 />
               )}
@@ -448,7 +449,6 @@ const SellerInbox = ({
 
       {/* send message input */}
       <form
-        aria-required={true}
         className="p-3 relative w-full flex justify-between items-center"
         onSubmit={sendMessageHandler}
       >

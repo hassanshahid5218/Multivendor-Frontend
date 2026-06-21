@@ -152,7 +152,7 @@ const AllCoupons = () => {
                   Create Coupon code
                 </h5>
                 {/* create coupoun code */}
-                <form onSubmit={handleSubmit} aria-required={true}>
+                <form onSubmit={handleSubmit} >
                   <br />
                   <div>
                     <label className="pb-2">

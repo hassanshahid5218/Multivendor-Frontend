@@ -128,6 +128,7 @@ const CartSingle = ({ data, quantityChangeHandler, removeFromCartHandler }) => {
 
       <img
         src={image[0]?.url}
+        alt=""
         className="w-[70px] h-[70px] object-cover rounded"
       />
 

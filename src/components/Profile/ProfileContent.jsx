@@ -135,7 +135,7 @@ const ProfileContent = ({ active }) => {
 
     {/* Form */}
     <div className="mt-10">
-      <form onSubmit={handleSubmit} aria-required={true}>
+      <form onSubmit={handleSubmit} >
 
         {/* First Row */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">

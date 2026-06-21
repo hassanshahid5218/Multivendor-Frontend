@@ -38,7 +38,7 @@ const ProductDetailsPage = () => {
     if (seller?._id) {
     dispatch(getAllEventsShop(seller._id));
   }
-  }, [dispatch]);
+  }, [dispatch,, seller?._id]);
 
   // Find product/event by id
   useEffect(() => {
@@ -70,7 +70,7 @@ const ProductDetailsPage = () => {
     if (foundData) {
       setData(foundData);
     }
-  }, [id, products, allProducts, allEvents, eventData]);
+  }, [id, products, allProducts,events, allEvents, eventData]);
 
   return (
     <div>
