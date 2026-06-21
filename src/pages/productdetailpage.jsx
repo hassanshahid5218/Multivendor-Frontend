@@ -38,7 +38,7 @@ const ProductDetailsPage = () => {
     if (seller?._id) {
     dispatch(getAllEventsShop(seller._id));
   }
-  }, [dispatch,, seller?._id]);
+  }, [dispatch, seller?._id]);
 
   // Find product/event by id
   useEffect(() => {
