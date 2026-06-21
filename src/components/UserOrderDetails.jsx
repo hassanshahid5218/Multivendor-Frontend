@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 
 const UserOrderDetails = () => {
   const { orders } = useSelector((state) => state.order);
-  const { user } = useSelector((state) => state.user);
+  const { user,isAuthenticated } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [comment, setComment] = useState("");
@@ -61,6 +61,28 @@ const UserOrderDetails = () => {
     }).catch((error) => {
       toast.error(error.response.data.message);
     })
+  };
+
+  const handleMessageSubmit = async () => {
+    if (isAuthenticated) {
+      const groupTitle = data._id + user._id;
+      const userId = user._id;
+      const sellerId = data.shop._id;
+      await axios
+        .post(`${server}/conversation/create-new-conversation`, {
+          groupTitle,
+          userId,
+          sellerId,
+        })
+        .then((res) => {
+          navigate(`/inbox?${res.data.conversation.id}`);
+        })
+        .catch((error) => {
+          toast.error(error.response.data.message);
+        });
+    } else {
+      toast.error("Please login to create a conversation");
+    }
   };
 
   return (
@@ -233,9 +255,9 @@ const UserOrderDetails = () => {
         </div>
       </div>
       <br />
-      <Link to="/">
-        <div className={`${styles.button} text-white`}>Send Message</div>
-      </Link>
+      
+        <div className={`${styles.button} text-white`}   onClick={handleMessageSubmit}>Send Message</div>
+      
       <br />
       <br />
     </div>
