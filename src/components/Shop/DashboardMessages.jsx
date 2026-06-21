@@ -132,43 +132,49 @@ const DashboardMessages = () => {
   getMessage();
 }, [currentChat]);
   // create new message
-  const sendMessageHandler = async (e) => {
-    e.preventDefault();
+ const sendMessageHandler = async (e) => {
+  e.preventDefault();
 
-    const message = {
-      sender: seller._id,
-      text: newMessage,
-      conversationId: currentChat._id,
-    };
+  const senderId = seller?._id || user?._id;
 
-    const receiverId = currentChat.members.find(
-      (member) => member !== seller._id
-    );
+  if (!senderId || !currentChat?._id) {
+    console.log("Sender or conversation not found");
+    return;
+  }
 
-    socketId.current.emit("sendMessage", {
-  senderId: user._id || seller._id,
-  receiverId,
-  conversationId: currentChat._id,   // 🔥 ADD THIS
-  text: newMessage,
-  images: null,
-});
+  const receiverId = currentChat.members.find(
+    (member) => member !== senderId
+  );
 
-    try {
-      if (newMessage !== "") {
-        await axios
-          .post(`${server}/message/create-new-message`, message)
-          .then((res) => {
-            setMessages((prev) => [...prev, res.data.message]);
-            updateLastMessage();
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  const message = {
+    sender: senderId,
+    text: newMessage,
+    conversationId: currentChat._id,
   };
+
+  socketId.current.emit("sendMessage", {
+    senderId,
+    receiverId,
+    conversationId: currentChat._id,
+    text: newMessage,
+    images: null,
+  });
+
+  try {
+    if (newMessage.trim() !== "") {
+      const res = await axios.post(
+        `${server}/message/create-new-message`,
+        message
+      );
+
+      setMessages((prev) => [...prev, res.data.message]);
+      updateLastMessage();
+      setNewMessage("");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
   const updateLastMessage = async () => {
     socketId.current.emit("updateLastMessage", {
