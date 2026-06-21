@@ -5,7 +5,6 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { IoIosArrowForward } from "react-icons/io";
 import { navItems } from "../../static/data";
 import { backend_url } from "../../server";
-import { productData } from "../../static/data";
 import { useSelector } from "react-redux";
 
 

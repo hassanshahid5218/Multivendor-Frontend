@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import styles from "../../styles/styles";
-import { categoriesData, productData, navItems } from "../../static/data";
+import { categoriesData, navItems } from "../../static/data";
 import {
   AiOutlineHeart,
   AiOutlineSearch,

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Header from '../components/Layout/header'
 import Footer from '../components/Layout/Footer'
 import { useSearchParams } from 'react-router-dom'
-import { productData } from '../static/data';
+
 import ProductCard from '../components/Route/ProductCard/ProductCard';
 import styles from '../styles/styles';
 import { useSelector } from 'react-redux';

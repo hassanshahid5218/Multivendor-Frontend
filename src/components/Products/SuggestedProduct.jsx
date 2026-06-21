@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { productData as staticProductData } from "../../static/data";
+
 import styles from "../../styles/styles";
 import ProductCard from "../Route/ProductCard/ProductCard";
 import { useSelector } from "react-redux";
@@ -28,11 +28,9 @@ const SuggestedProduct = ({ data }) => {
       (i) => normalizeCategory(i.category) === currentCategory && i !== data
     )
 
-    const fallbackProducts = staticProductData.filter((i) => i !== data);
+    
 
-    setSuggestedProducts(
-      relatedProducts.length > 0 ? relatedProducts : fallbackProducts.slice(0, 5)
-    );
+    setSuggestedProducts(relatedProducts);
   }, [data]);
 
   return (
